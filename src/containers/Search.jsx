@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import searchimg from "../assets/images/search.svg"
 import doston from "../assets/images/doston.jpg"
+import Footer from '../components/Footer';
 
 
 const Search = () => {
@@ -62,33 +63,35 @@ const Search = () => {
     }
 
     return (
-        <Wrapper>
-            <div className="search">
-                <input type="text" placeholder='Search' onChange={(e) => search(e)} />
-                <img src={searchimg} alt="" />
-            </div>
+        <>
+            <Wrapper>
+                <div className="search">
+                    <input type="text" placeholder='Search' onChange={(e) => search(e)} />
+                    <img src={searchimg} alt="" />
+                </div>
 
 
-            <ul className="users">
-                {
-                    data.map(({ name, image }) => {
-                        return (
-                            <Link to="/">
-                                <img src={image} alt="" />
-                                <h2>{name}</h2>
-                            </Link>
-                        )
+                <ul className="users">
+                    {
+                        data.map(({ name, image }) => {
+                            return (
+                                <Link to="/">
+                                    <img src={image} alt="" />
+                                    <h2>{name}</h2>
+                                </Link>
+                            )
+                        })}
+                </ul>
+
+                <div className="cards">
+                    {
+                        imgData.map(data => <Card key={data.id} data={data} />)
                     }
-                    )
-                }
-            </ul>
+                </div>
 
-            <div className="cards">
-                {
-                    imgData.map(data => <Card key={data.id} data={data} />)
-                }
-            </div>
-        </Wrapper>
+            </Wrapper>
+            <Footer className="footer" />
+        </>
     );
 }
 
@@ -97,6 +100,7 @@ export default Search;
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    position: relative;
 
     .search {
         position: relative;
@@ -134,7 +138,7 @@ const Wrapper = styled.div`
     }
 
     .cards {
-        height: calc(812px - 84px);
+        height: calc(812px - 168px);
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
         grid-auto-rows: 124px;
@@ -148,9 +152,20 @@ const Wrapper = styled.div`
     }    
 
     .users {
+        width: 100%;
+        max-height: calc(812px - 164px);
+        background-color: white;
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
         padding: 0 8px;
+        position: absolute;
+        top: 48px;
+        background-color: white;
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
 
         a {
             width: 100%;
@@ -169,4 +184,6 @@ const Wrapper = styled.div`
             }
         }
     }
+
+    
 `
