@@ -7,7 +7,6 @@ function Account () {
     const navigate = useNavigate()
     return (
         <Wrapper>
-            <Header />
             <div className="account-container">
                 <div className="account-container__logo">
                     <img src={Logo} alt="" />

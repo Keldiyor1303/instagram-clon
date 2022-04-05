@@ -4,7 +4,6 @@ import Logo from "../../assets/Logo/Logo.svg"
 import faceBookIcon from "../../assets/icons/Icon.svg"
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Header from '../Header';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -19,7 +18,6 @@ const Login = () => {
     }
     return (
         <Wrapper>
-            <Header />
             <div className='login-container'>
                 <div className="login-container__back" onClick={() => navigate("/account")}>
                     <FontAwesomeIcon icon={faAngleLeft} className="icon" />

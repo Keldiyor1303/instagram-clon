@@ -20,7 +20,6 @@ const SignUp = () => {
     }
     return (
         <Wrapper>
-            <Header />
             <div className='signUp-container'>
                 <div className="signUp-container__back" onClick={() => navigate(-1)}>
                     <FontAwesomeIcon icon={faAngleLeft} className="icon" />
