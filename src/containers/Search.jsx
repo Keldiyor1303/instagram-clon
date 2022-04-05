@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import search from "../assets/images/search.svg"
 import image from "../assets/images/nootbook.png"
 import Card from '../components/search/Card';
+import { Link } from 'react-router-dom';
+
+import searchimg from "../assets/images/search.svg"
+import doston from "../assets/images/doston.jpg"
+
 
 const Search = () => {
 
@@ -36,12 +40,48 @@ const Search = () => {
         { id: 27, image: image },
     ]
 
+    const nameList = [
+        { name: "Keldiyor", image: doston },
+        { name: "Mirabzal", image: doston },
+        { name: "Hasanali", image: doston },
+        { name: "Javohir", image: doston },
+        { name: "Doniyor", image: doston },
+        { name: "Keldiyorrr", image: doston },
+    ]
+
+    const [data, setData] = useState([])
+
+    const search = (e) => {
+        let faceData = []
+        for (let i = 0; i < nameList.length; i++) {
+            let name = nameList[i].name.toUpperCase()
+            if ((name.search(e.target.value.toUpperCase()) >= 0) && (e.target.value !== "")) faceData.push(nameList[i])
+        }
+
+        setData(faceData)
+    }
+
     return (
         <Wrapper>
             <div className="search">
-                <input type="text" placeholder='Search' />
-                <img src={search} alt="" />
+                <input type="text" placeholder='Search' onChange={(e) => search(e)} />
+                <img src={searchimg} alt="" />
             </div>
+
+
+            <ul className="users">
+                {
+                    data.map(({ name, image }) => {
+                        return (
+                            <Link to="/">
+                                <img src={image} alt="" />
+                                <h2>{name}</h2>
+                            </Link>
+                        )
+                    }
+                    )
+                }
+            </ul>
 
             <div className="cards">
                 {
@@ -55,6 +95,9 @@ const Search = () => {
 export default Search;
 
 const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+
     .search {
         position: relative;
         
@@ -102,6 +145,28 @@ const Wrapper = styled.div`
         ::-webkit-scrollbar {
             width: 0;
         }
-
     }    
+
+    .users {
+        display: flex;
+        flex-direction: column;
+        padding: 0 8px;
+
+        a {
+            width: 100%;
+            height: 36px;
+            color: black;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+
+            img {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+            }
+        }
+    }
 `

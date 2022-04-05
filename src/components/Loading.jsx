@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from "../assets/images/logo.png"
+import Fade from 'react-reveal/Fade';
 
 const Loading = () => {
 
@@ -11,10 +12,12 @@ const Loading = () => {
 
     return (
         <Wrapper>
-            <div className="loading">
-                <img src={logo} alt="instagram" />
-                <h2>Instagram</h2>
-            </div>
+            <Fade right cascade>
+                <div className="loading">
+                    <img src={logo} alt="instagram" />
+                    <h2>Instagram</h2>
+                </div>
+            </Fade>
         </Wrapper>
     );
 }

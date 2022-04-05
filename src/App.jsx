@@ -9,6 +9,8 @@ import Home from "./containers/Home";
 import Likes from "./containers/Likes";
 import Profile from "./containers/Profile";
 import Search from "./containers/Search";
+import YouLink from "./components/likes/YouLink";
+import FollowingLink from "./components/likes/FollowingLink";
 
 function App() {
   const pathLink = [
@@ -16,6 +18,8 @@ function App() {
     { path: "/home", element: < Home /> },
     { path: "/search", element: < Search /> },
     { path: "/likes", element: < Likes /> },
+    { path: "/likes/you", element: < YouLink /> },
+    { path: "/likes/following", element: < FollowingLink /> },
     { path: "/profile", element: < Profile /> },
     { path: "/account", element: < Account /> },
     { path: "/account/login", element: < Login /> },
@@ -35,7 +39,6 @@ function App() {
             )
           })
         }
-
       </Routes>
     </Wrapper>
   );
