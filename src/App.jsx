@@ -1,6 +1,9 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/Header";
+import Account from "./components/account/account";
+import Login from "./components/account/Login";
+import SignUp from "./components/account/SignUp";
 import Loading from "./components/Loading";
 import Home from "./containers/Home";
 import Likes from "./containers/Likes";
@@ -14,6 +17,9 @@ function App() {
     { path: "/search", element: < Search /> },
     { path: "/likes", element: < Likes /> },
     { path: "/profile", element: < Profile /> },
+    { path: "/account", element: < Account /> },
+    { path: "/account/login", element: < Login /> },
+    { path: "/account/signup", element: < SignUp /> },
   ]
 
   const { pathname } = useLocation()

@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from '../components/Header';
 
 const Profile = () => {
     return (
         <Wrapper>
-            <h2>Profile</h2>
+            <Header />
         </Wrapper>
     );
 }
