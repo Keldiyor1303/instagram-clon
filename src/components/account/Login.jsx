@@ -1,4 +1,4 @@
-import { faAngleLeft, faFaceKiss } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from "../../assets/Logo/Logo.svg"
 import faceBookIcon from "../../assets/icons/Icon.svg"
@@ -13,7 +13,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    function LoginSubmit () {
+    function LoginSubmit() {
         if (username === "admin" && password === "admin") navigate("/main")
         else alert("Siz kiritgan ma' lumotda Xatolik bor");
     }
@@ -26,12 +26,12 @@ const Login = () => {
                 </div>
                 <div className="login-container__input">
                     <img src={Logo} alt="" />
-                    <input type={"text"} placeholder="Username" onChange={({target}) => setUsername(target.value)}/>
-                    <input type={"password"} placeholder="Password" onChange={({target}) => setPassword(target.value)}/>
+                    <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
+                    <input type={"password"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
                     <p className="forgotPassword">Forgot password?</p>
                     <button onClick={LoginSubmit}>Log in</button>
                     <div className="login-Facebook">
-                        <img src={faceBookIcon} alt="" /> 
+                        <img src={faceBookIcon} alt="" />
                         <p>Log in with Facebook</p>
                     </div>
 

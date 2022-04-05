@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignal, faWifi, faBatteryFull } from "@fortawesome/free-solid-svg-icons"
 
 import signal from "../assets/images/Mobile Signal.svg"
 import wifi from "../assets/images/Wifi.svg"

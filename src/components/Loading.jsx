@@ -7,7 +7,7 @@ const Loading = () => {
 
     const navigate = useNavigate()
 
-    setTimeout(() => navigate("/home"), 2000)
+    setTimeout(() => navigate("/account"), 2000)
 
     return (
         <Wrapper>
