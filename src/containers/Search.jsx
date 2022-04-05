@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import searchimg from "../assets/images/search.svg"
 import doston from "../assets/images/doston.jpg"
+import Footer from '../components/Footer';
 
 
 const Search = () => {
@@ -67,8 +68,6 @@ const Search = () => {
                 <input type="text" placeholder='Search' onChange={(e) => search(e)} />
                 <img src={searchimg} alt="" />
             </div>
-
-
             <ul className="users">
                 {
                     data.map(({ name, image }) => {
@@ -88,6 +87,7 @@ const Search = () => {
                     imgData.map(data => <Card key={data.id} data={data} />)
                 }
             </div>
+            <Footer />
         </Wrapper>
     );
 }

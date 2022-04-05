@@ -18,8 +18,10 @@ import Save from "../assets/icons/saveIcon.svg"
 
 import User from "../assets/images/user1.png"
 import PostImg from "../assets/images/post_img.png"
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
+    const navigate = useNavigate()
     return (
         <Wrapper>
             <div className='main-container'>
@@ -36,9 +38,10 @@ const Main = () => {
                     </div>
                 </div>
                 <div className='main-container__user'>
-                    <div className='user-Box'>
+                    <div className='user-Box' onClick={() => navigate("/createStory")} >
                         <img src={User} alt="user" />
                         <p>Your Story</p>
+                        <button>+</button>
                     </div>
                     <div className='user-Box'>
                         <img src={User} alt="user" />
@@ -100,22 +103,7 @@ const Main = () => {
                         <img src={User} alt="user" />
                         <p>Your Story</p>
                     </div>
-                    <div className='user-Box'>
-                        <img src={User} alt="user" />
-                        <p>Your Story</p>
-                    </div>
-                    <div className='user-Box'>
-                        <img src={User} alt="user" />
-                        <p>Your Story</p>
-                    </div>
-                    <div className='user-Box'>
-                        <img src={User} alt="user" />
-                        <p>Your Story</p>
-                    </div>
-                    <div className='user-Box'>
-                        <img src={User} alt="user" />
-                        <p>Your Story</p>
-                    </div>
+                   
                 </div>
                 <div className='main_container__post'>
                     <div>
@@ -433,6 +421,27 @@ const Wrapper = styled.div`
         width: 62px;
         height: 81px;
     }
+
+    .user-Box:first-child {
+        width: 62px;
+        height: 81px;
+        position: relative;
+    }
+
+    .user-Box:first-child button {
+        position: absolute;
+        bottom: 20px;
+        right: 0px;
+        text-align: center;
+        width: 15px;
+        height: 15px;
+        line-height: 7px;
+        border-radius: 50%;
+        color: #fff;
+        background-color: blue;
+        border: 1px solid #fff;
+     }
+
 
     .user-Box img {
         width: 62px;
