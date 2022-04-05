@@ -19,7 +19,6 @@ const Login = () => {
     }
     return (
         <Wrapper>
-            <Header />
             <div className='login-container'>
                 <div className="login-container__back" onClick={() => navigate("/account")}>
                     <FontAwesomeIcon icon={faAngleLeft} className="icon" />
