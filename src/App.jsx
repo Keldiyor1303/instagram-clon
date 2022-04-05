@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import Header from "./components/Header";
 import Loading from "./components/Loading";
 import Home from "./containers/Home";
 import Likes from "./containers/Likes";
@@ -14,8 +15,12 @@ function App() {
     { path: "/likes", element: < Likes /> },
     { path: "/profile", element: < Profile /> },
   ]
+
+  const { pathname } = useLocation()
   return (
     <Wrapper>
+      {pathname !== "/" && <Header />}
+
       <Routes>
         {
           pathLink.map(({ path, element }) => {

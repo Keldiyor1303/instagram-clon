@@ -1,10 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import logo from "../assets/images/logo.png"
 
 const Loading = () => {
+
+    const navigate = useNavigate()
+
+    setTimeout(() => navigate("/home"), 2000)
+
     return (
         <Wrapper>
-            <h2>Loading</h2>
+            <div className="loading">
+                <img src={logo} alt="instagram" />
+                <h2>Instagram</h2>
+            </div>
         </Wrapper>
     );
 }
@@ -12,5 +22,25 @@ const Loading = () => {
 export default Loading;
 
 const Wrapper = styled.div`
-    
+    height: 100%;
+    background: linear-gradient(180deg, #833AB4 0%, #5B51D8 100%);
+    text-align: center;
+
+    h2 {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 58px;
+        letter-spacing: -0.33px;
+        color: #FFFFFF;
+        margin-top: 16px;
+    }    
+
+    .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 `
