@@ -8,6 +8,7 @@ import Heart from "../assets/icons/heartIcon.svg"
 import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
+
     return (
         <Wrapper>
             <div className='footer-container'>
@@ -57,5 +58,8 @@ const Wrapper = styled.div`
     .user {
         width: 23px;
         height: 23px;
+    }
+
+    .active {
     }
 `
