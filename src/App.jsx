@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import Account from "./components/account/account";
+import Login from "./components/account/Login";
+import SignUp from "./components/account/SignUp";
 import Loading from "./components/Loading";
 import Home from "./containers/Home";
 import Likes from "./containers/Likes";
@@ -13,6 +16,9 @@ function App() {
     { path: "/search", element: < Search /> },
     { path: "/likes", element: < Likes /> },
     { path: "/profile", element: < Profile /> },
+    { path: "/account", element: < Account /> },
+    { path: "/account/login", element: < Login /> },
+    { path: "/account/signup", element: < SignUp /> },
   ]
   return (
     <Wrapper>

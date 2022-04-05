@@ -5,6 +5,11 @@
 }
 
 body {
-  background-color: aqua;
   font-family: "SF Pro Text";
+  background-color: #f9f9f9;
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("./assets/fonts/SF-Pro-Display-MediumItalic.otf") format("woff2"),
 }
