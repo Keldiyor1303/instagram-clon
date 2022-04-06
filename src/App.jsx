@@ -12,6 +12,7 @@ import Search from "./containers/Search";
 import YouLink from "./components/likes/YouLink";
 import FollowingLink from "./components/likes/FollowingLink";
 import Main from "./containers/Main";
+import ProfileEdit from "./containers/ProfileEdit";
 
 function App() {
   const pathLink = [
@@ -22,6 +23,7 @@ function App() {
     { path: "/likes/you", element: < YouLink /> },
     { path: "/likes/following", element: < FollowingLink /> },
     { path: "/profile", element: < Profile /> },
+    { path: "/profileEdit", element: < ProfileEdit /> },
     { path: "/account", element: < Account /> },
     { path: "/main", element: < Main /> },
     { path: "/account/login", element: < Login /> },
