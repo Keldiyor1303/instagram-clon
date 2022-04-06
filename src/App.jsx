@@ -12,11 +12,8 @@ import Search from "./containers/Search";
 import YouLink from "./components/likes/YouLink";
 import FollowingLink from "./components/likes/FollowingLink";
 import Main from "./containers/Main";
-<<<<<<< HEAD
 import Footer from "./components/Footer";
-=======
 import ProfileEdit from "./containers/ProfileEdit";
->>>>>>> 4bf48c79677e89be8b1768670c014672a857e1e7
 
 function App() {
   const pathLink = [
