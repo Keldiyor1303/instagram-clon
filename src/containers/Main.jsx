@@ -103,7 +103,7 @@ const Main = () => {
                         <img src={User} alt="user" />
                         <p>Your Story</p>
                     </div>
-                   
+
                 </div>
                 <div className='main_container__post'>
                     <div>
@@ -113,7 +113,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -127,13 +127,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>
@@ -150,7 +150,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -164,13 +164,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>
@@ -187,7 +187,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -201,13 +201,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>
@@ -224,7 +224,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -238,13 +238,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>
@@ -261,7 +261,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -275,13 +275,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>
@@ -298,7 +298,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -312,13 +312,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>
@@ -335,7 +335,7 @@ const Main = () => {
                                 <div className='post-header__user-text'>
                                     <p>joshua_l</p>
                                     <p>Tokyo, Japan</p>
-                        
+
                                 </div>
                             </div>
                             <div>
@@ -349,13 +349,13 @@ const Main = () => {
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
-                                    <img src={Heart} alt='heartIcon'/>
-                                    <img src={Comment} alt='heartIcon'/>
-                                    <img src={Messange} alt='heartIcon'/>
+                                    <img src={Heart} alt='heartIcon' />
+                                    <img src={Comment} alt='heartIcon' />
+                                    <img src={Messange} alt='heartIcon' />
                                 </div>
 
                                 <div>
-                                    <img src={Save} alt=""/>
+                                    <img src={Save} alt="" />
                                 </div>
                             </div>
                             <div className='footer-other'>

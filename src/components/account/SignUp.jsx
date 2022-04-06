@@ -5,7 +5,6 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../Header';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -14,7 +13,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
 
-    function SignUpSubmit () {
+    function SignUpSubmit() {
         if (username === "admin" && password === "admin" && password === confirm) navigate("/main")
         else alert("Siz kiritgan ma' lumotda Xatolik bor");
     }
@@ -26,9 +25,9 @@ const SignUp = () => {
                 </div>
                 <div className="signUp-container__input">
                     <img src={Logo} alt="" />
-                    <input type={"text"} placeholder="Username" onChange={({target}) => setUsername(target.value)}/>
-                    <input type={"password"} placeholder="Password" onChange={({target}) => setPassword(target.value)}/>
-                    <input type={"password"} placeholder="Coniform" onChange={({target}) => setConfirm(target.value)}/>
+                    <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
+                    <input type={"password"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
+                    <input type={"password"} placeholder="Coniform" onChange={({ target }) => setConfirm(target.value)} />
                     <p className="forgotPassword">Forgot password?</p>
                     <button onClick={SignUpSubmit}>Sign Up</button>
                     <p className="accountSignup">Don’t have an account? <span onClick={() => navigate("/account/login")}>Login</span></p>

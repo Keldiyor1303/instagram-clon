@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 
 import searchimg from "../assets/images/search.svg"
 import doston from "../assets/images/doston.jpg"
-import Footer from '../components/Footer';
 
+import Flip from "react-reveal/Flip"
 
 const Search = () => {
 
     const imgData = [
-        { id: 1, image: image },
+        { id: 1, image: image, },
         { id: 2, image: image },
         { id: 3, image: image },
         { id: 4, image: image },
@@ -47,7 +47,7 @@ const Search = () => {
         { name: "Hasanali", image: doston },
         { name: "Javohir", image: doston },
         { name: "Doniyor", image: doston },
-        { name: "Keldiyorrr", image: doston },
+        { name: "Komil", image: doston },
     ]
 
     const [data, setData] = useState([])
@@ -63,14 +63,13 @@ const Search = () => {
     }
 
     return (
-        <>
-            <Wrapper>
-                <div className="search">
-                    <input type="text" placeholder='Search' onChange={(e) => search(e)} />
-                    <img src={searchimg} alt="" />
-                </div>
+        <Wrapper>
+            <div className="search">
+                <input type="text" placeholder='Search' onChange={(e) => search(e)} />
+                <img src={searchimg} alt="" />
+            </div>
 
-
+            <Flip top cascade>
                 <ul className="users">
                     {
                         data.map(({ name, image }) => {
@@ -82,16 +81,15 @@ const Search = () => {
                             )
                         })}
                 </ul>
+            </Flip>
 
-                <div className="cards">
-                    {
-                        imgData.map(data => <Card key={data.id} data={data} />)
-                    }
-                </div>
+            <div className="cards">
+                {
+                    imgData.map(data => <Card key={data.id} data={data} />)
+                }
+            </div>
 
-            </Wrapper>
-            <Footer className="footer" />
-        </>
+        </Wrapper>
     );
 }
 

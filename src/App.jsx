@@ -12,6 +12,7 @@ import Search from "./containers/Search";
 import YouLink from "./components/likes/YouLink";
 import FollowingLink from "./components/likes/FollowingLink";
 import Main from "./containers/Main";
+import Footer from "./components/Footer";
 
 function App() {
   const pathLink = [
@@ -42,6 +43,12 @@ function App() {
           })
         }
       </Routes>
+      {!(pathname === "/"
+        || pathname === "/account"
+        || pathname === "/account/login"
+        || pathname === "/account/signup"
+        || pathname === "/profileEdit")
+        && <Footer />}
     </Wrapper>
   );
 }
