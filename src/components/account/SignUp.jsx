@@ -10,27 +10,34 @@ import axios from 'axios';
 const SignUp = () => {
     const navigate = useNavigate();
 
+
+    const [fullname, setFullname] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    // const [confirm, setConfirm] = useState("");
-
-    // function SignUpSubmit() {
-    //     if (username === "admin" && password === "admin" && password === confirm) navigate("/main")
-    //     else alert("Siz kiritgan ma' lumotda Xatolik bor");
-    // }
+    const [website, setWebsite] = useState("");
+    const [bio, setBio] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const [gender, setGender] = useState("");
 
     function SignUpSubmit() {
         axios.post("https://searching-server.herokuapp.com/auth/registration", {
-            fullName: "Keldiyor Raxmatov",
-            username: username,
-            password: password,
-            website: "website.com",
-            bio: "Biography",
-            email: "keldiyorraxmatov1303@gmail.com",
-            phone: "998941234517",
-            birthDate: "2003-03-13",
-            gender: "MALE"
-        }).then(res => console.log("ishladi"))
+            "fullName": fullname,
+            "username": username,
+            "password": password,
+            "website": website,
+            "bio": bio,
+            "email": email,
+            "phone": phone,
+            "birthDate": birthDate,
+            "gender": gender
+
+        }).then(res => {
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+            navigate("/account/login")
+        }).catch(err => console.log(err))
     }
 
     return (
@@ -41,19 +48,25 @@ const SignUp = () => {
                 </div>
                 <div className="signUp-container__input">
                     <img src={Logo} alt="" />
+                    <input type={"text"} placeholder="Fullname" onChange={({ target }) => setFullname(target.value)} />
                     <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
-                    <input type={"password"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
-                    {/* <input type={"password"} placeholder="Coniform" onChange={({ target }) => setConfirm(target.value)} /> */}
+
+                    <input type={"password"} placeholder="password" onChange={({ target }) => setPassword(target.value)} />
+                    <input type={"text"} placeholder="Website" onChange={({ target }) => setWebsite(target.value)} />
+                    <input type={"text"} placeholder="bio" onChange={({ target }) => setBio(target.value)} />
+                    <input type={"email"} placeholder="Email" onChange={({ target }) => setEmail(target.value)} />
+                    <input type={"number"} placeholder="phone" onChange={({ target }) => setPhone(target.value)} />
+                    <input type={"date"} placeholder="BirthDate" onChange={({ target }) => setBirthDate(target.value)} />
+                    <input type={"check"} placeholder="Gender" onChange={({ target }) => setGender(target.value)} />
                     <p className="forgotPassword">Forgot password?</p>
                     <button onClick={SignUpSubmit}>Sign Up</button>
                     <p className="accountSignup">Don’t have an account? <span onClick={() => navigate("/account/login")}>Login</span></p>
-                </div>
-
+                </div >
                 <div className="signUp-container-signUp__footer">
                     <p>Instagram от Facebook</p>
                 </div>
-            </div>
-        </Wrapper>
+            </div >
+        </Wrapper >
     );
 }
 
@@ -72,8 +85,15 @@ const Wrapper = styled.div`
     }
 
     .signUp-container__input {
+        width: 100%;
+        height: 600px;
         text-align: center;
-        margin: 94px auto;
+        margin: 10px auto;
+        overflow-y: scroll;
+    }
+
+    .signUp-container__input::-webkit-scrollbar {
+        display: none;
     }
 
     .signUp-container__input img {

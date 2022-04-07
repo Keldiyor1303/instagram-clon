@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import searchimg from "../assets/images/search.svg"
 import doston from "../assets/images/doston.jpg"
 
-import Flip from "react-reveal/Flip"
+import Flip from "react-reveal/Flip";
 
 const Search = () => {
 
