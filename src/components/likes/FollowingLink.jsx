@@ -34,7 +34,7 @@ const FollowingLink = () => {
                 {
                     data.map(({ avatar, name, image }) => {
                         return (
-                            <li>
+                            <li key={Math.random()}>
                                 <div className="avatar-info">
                                     <div className="avatar">
                                         <img src={avatar} alt="" />

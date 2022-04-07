@@ -2,19 +2,39 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from "../../assets/Logo/Logo.svg"
 import faceBookIcon from "../../assets/icons/Icon.svg"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const localUsername = localStorage.getItem("username")
+const localPassword = localStorage.getItem("password")
+
 
 const Login = () => {
-    const navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    useEffect(() => {
+        const input = document.querySelectorAll("input")
+        input[0].value = localUsername
+        input[1].value = localPassword
+    }, [])
+       
+    const navigate = useNavigate();
+    const [username, setUsername] = useState(localUsername || "");
+    const [password, setPassword] = useState(localPassword || "");
 
     function LoginSubmit() {
-        if (username === "admin" && password === "admin") navigate("/main")
-        else alert("Siz kiritgan ma' lumotda Xatolik bor");
+        
+            axios.post("https://searching-server.herokuapp.com/auth/login", {
+                "username": username, 
+                "password": password,          
+            }).then(res => {
+                console.log(res.data)
+                localStorage.setItem("user-token", res.data.jwt)
+                navigate("/main")
+            })
+              .catch(err => console.log(err))
+         
     }
     return (
         <Wrapper>
@@ -25,7 +45,7 @@ const Login = () => {
                 <div className="login-container__input">
                     <img src={Logo} alt="" />
                     <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
-                    <input type={"password"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
+                    <input type={"text"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
                     <p className="forgotPassword">Forgot password?</p>
                     <button onClick={LoginSubmit}>Log in</button>
                     <div className="login-Facebook">

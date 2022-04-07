@@ -59,11 +59,6 @@ export default ProfileEdit;
 
 const Wrapper = styled.div`
 
-    p, span, b,
-    h1, h2, h3, h4, h5 {
-        cursor: pointer;
-    }
-
     .edit-profile-container {
         margin-top: 12px;
         width: 100%;

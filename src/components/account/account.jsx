@@ -23,7 +23,7 @@ function Account () {
                 </div>
 
                 <div className="account-container__register">
-                    <p>Don’t have an account? <span> Sign up</span> </p>
+                    <p>Don’t have an account? <span onClick={() => navigate("/account/signup")}> Sign up</span> </p>
                 </div>
             </div>
         </Wrapper>
@@ -104,6 +104,7 @@ const Wrapper = styled.div`
         text-align: center;
         letter-spacing: -0.01px;
         color: rgba(0, 0, 0, 0.4);
+        cursor: pointer;
     }
 
     .account-container__register p span {

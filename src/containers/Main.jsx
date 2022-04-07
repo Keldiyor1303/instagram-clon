@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from '../components/Footer';
-
+import Zoom from 'react-reveal/Zoom';
 // import icon
 
 import Camera from "../assets/icons/cameraIcon.svg"
@@ -12,7 +11,7 @@ import More from "../assets/icons/moreIcon.svg"
 import Heart from "../assets/icons/heartIcon.svg"
 import Comment from "../assets/icons/commentIcon.svg"
 import Save from "../assets/icons/saveIcon.svg"
-
+import Like from "../assets/icons/likeIcon.svg"
 
 // import user
 
@@ -22,6 +21,21 @@ import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
     const navigate = useNavigate()
+    function AddLike () {
+        const postMedia = document.querySelector('.post-media')
+        const like = document.createElement('div')
+        like.classList.add("onClickLike")
+        like.innerHTML = `
+    
+            <img src=${Like} alt="" />
+        
+        `
+        setTimeout(() => {
+            like.remove()
+        }, 1000)
+        postMedia.append(like)
+    }
+
     return (
         <Wrapper>
             <div className='main-container'>
@@ -120,10 +134,13 @@ const Main = () => {
                                 <img src={More} alt="more-icon" />
                             </div>
                         </div>
-                        <div className='post-media'>
+                        
+
+                        <div className='post-media' onDoubleClick={AddLike}>
                             <img src={PostImg} alt="" />
                             <button>1/3</button>
                         </div>
+                     
                         <div className='post-footer'>
                             <div className='footer-icon'>
                                 <div>
@@ -367,7 +384,6 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </Wrapper>
     );
 }
@@ -527,6 +543,13 @@ const Wrapper = styled.div`
         border-radius: 13px;
         color: #F9F9F9;
         border: none;
+    }
+
+    .onClickLike {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .post-footer {

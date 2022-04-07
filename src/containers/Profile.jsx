@@ -198,13 +198,12 @@ const Profile = () => {
             </div>
             <div className='profileSidebar'>
                 {profileSidebar.map(({img, text}) => (
-                    <div className='profileSidebar__icon'>
+                    <div className='profileSidebar__icon' key={Math.random()}>
                         <img src={img} alt="profileIcon" />
                         <p>{text}</p>
                     </div>
                 ))}
             </div>
-            <Footer />
         </Wrapper>
     );
 }
@@ -420,7 +419,7 @@ const Wrapper = styled.div`
 
  .gallary {
      width: 100%;
-     height: 260px;
+     height: 257px;
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
      overflow-y: scroll;
@@ -486,9 +485,5 @@ const Wrapper = styled.div`
     line-height: 20px;
     letter-spacing: -0.25px;
     color: #262626;
-   
 }
-
-
-
 `
