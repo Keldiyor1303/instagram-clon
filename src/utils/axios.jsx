@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const defaultOptions = {
-    baseURL: "http://142.93.229.148/",
+    baseURL: "http://instagram-backent.herokuapp.com",
     headers: {
         'Content-Type': 'application/json',
     },
@@ -10,7 +10,7 @@ const defaultOptions = {
 let API = axios.create(defaultOptions);
 
 API.interceptors.request.use(function (config) {
-    let token=localStorage.getItem('user-token')
+    let token = localStorage.getItem('user-token')
 
     config.headers.Authorization = token ? `Bearer ${token}` : '';
     return config;

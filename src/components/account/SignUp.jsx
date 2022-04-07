@@ -5,18 +5,34 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SignUp = () => {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [confirm, setConfirm] = useState("");
+    // const [confirm, setConfirm] = useState("");
+
+    // function SignUpSubmit() {
+    //     if (username === "admin" && password === "admin" && password === confirm) navigate("/main")
+    //     else alert("Siz kiritgan ma' lumotda Xatolik bor");
+    // }
 
     function SignUpSubmit() {
-        if (username === "admin" && password === "admin" && password === confirm) navigate("/main")
-        else alert("Siz kiritgan ma' lumotda Xatolik bor");
+        axios.post("https://searching-server.herokuapp.com/auth/registration", {
+            fullName: "Keldiyor Raxmatov",
+            username: username,
+            password: password,
+            website: "website.com",
+            bio: "Biography",
+            email: "keldiyorraxmatov1303@gmail.com",
+            phone: "998941234517",
+            birthDate: "2003-03-13",
+            gender: "MALE"
+        }).then(res => console.log("ishladi"))
     }
+
     return (
         <Wrapper>
             <div className='signUp-container'>
@@ -27,7 +43,7 @@ const SignUp = () => {
                     <img src={Logo} alt="" />
                     <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
                     <input type={"password"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
-                    <input type={"password"} placeholder="Coniform" onChange={({ target }) => setConfirm(target.value)} />
+                    {/* <input type={"password"} placeholder="Coniform" onChange={({ target }) => setConfirm(target.value)} /> */}
                     <p className="forgotPassword">Forgot password?</p>
                     <button onClick={SignUpSubmit}>Sign Up</button>
                     <p className="accountSignup">Don’t have an account? <span onClick={() => navigate("/account/login")}>Login</span></p>
