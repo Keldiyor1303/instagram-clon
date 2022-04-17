@@ -1,53 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchHeader from './SearchHeader';
 import avatar from "../../assets/images/avatar.png"
-import followingImg from "../../assets/images/followImg.png"
+import API from '../../utils/axios';
+import Error from '../error';
 
 const FollowingLink = () => {
-    const data = [
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-    ]
+
+    // const [post, setPost] = useState([]);
+    const [likeMe, setLikeMe] = useState([]);
+    const [error, setError] = useState("")
+
+    //  https://searching-server.herokuapp.com/
+    // axios.get("https://searching-server.herokuapp.com/following/followers/19").then(res => console.log(res))
+
+    useEffect(() => {
+        API.get("https://searching-server.herokuapp.com/like/me")
+            .then(res => setLikeMe(res.data))
+            .catch(res => setError(res.message))
+
+        // API.get(`https://searching-server.herokuapp.com/post/`)
+        //     .then(res => setPost(res.data))
+        //     .catch(res => setError(res.message))
+    }, [])
+
+    // @mirabzal_07
     return (
         <Wrapper>
             <SearchHeader />
             <ul>
                 {
-                    data.map(({ avatar, name, image }) => {
+                    likeMe.map(({ id }) => {
                         return (
                             <li key={Math.random()}>
                                 <div className="avatar-info">
                                     <div className="avatar">
                                         <img src={avatar} alt="" />
                                     </div>
-                                    <p>{name}</p>
+                                    <p>jcnsakj</p>
                                 </div>
 
-                                <img src={image} alt="" />
+                                <img src={`https://searching-server.herokuapp.com/attach/open/${id}`} alt="" />
+                                {/* <button className='like-btn'>Follow</button> */}
                             </li>
                         )
                     })
                 }
             </ul>
+            {error.length > 0 ? <Error error={error} /> : ""}
         </Wrapper>
     );
 }
@@ -75,9 +75,16 @@ const Wrapper = styled.div`
             justify-content: space-between;
             align-items: center;
 
-            & > img {
-                width: 46px;
-                height: 46px;
+            .like-btn {
+                padding: 6px 23px;
+                background: #3797EF;
+                border-radius: 4px;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: -0.2px;
+                color: #FFFFFF;
+                border: none;
             }
             
             .avatar-info {

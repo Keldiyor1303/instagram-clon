@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Card = ({ data }) => {
+const Card = ({ attachs, id }) => {
 
-    const { id, image } = data;
     return (
         <Wrapper id={id}>
-            <img src={image} alt="" />
+            <img src={`https://searching-server.herokuapp.com/attach/open/${attachs}`} alt="" />
         </Wrapper>
     );
 }

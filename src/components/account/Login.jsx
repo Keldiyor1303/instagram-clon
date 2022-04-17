@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Error from '../error';
 
 const localUsername = localStorage.getItem("username")
 const localPassword = localStorage.getItem("password")
@@ -13,28 +14,31 @@ const localPassword = localStorage.getItem("password")
 
 const Login = () => {
 
+    const navigate = useNavigate();
+    const [username, setUsername] = useState(localUsername || "");
+    const [password, setPassword] = useState(localPassword || "");
+    const [loginSave, setLoginSave] = useState("Log in");
+    const [error, setError] = useState("")
+
     useEffect(() => {
         const input = document.querySelectorAll("input")
         input[0].value = localUsername
         input[1].value = localPassword
     }, [])
-       
-    const navigate = useNavigate();
-    const [username, setUsername] = useState(localUsername || "");
-    const [password, setPassword] = useState(localPassword || "");
 
     function LoginSubmit() {
-        
-            axios.post("https://searching-server.herokuapp.com/auth/login", {
-                "username": username, 
-                "password": password,          
-            }).then(res => {
-                console.log(res.data)
-                localStorage.setItem("user-token", res.data.jwt)
-                navigate("/main")
-            })
-              .catch(err => console.log(err))
-         
+        setLoginSave("Loading...")
+        axios.post("https://searching-server.herokuapp.com/auth/login", {
+            "username": username,
+            "password": password,
+        }).then(res => {
+            localStorage.setItem('login-res', JSON.stringify(res))
+            localStorage.setItem("user-token", res.data.jwt)
+            navigate("/main");
+            setLoginSave("Log in")
+        })
+            .catch(err => { setError(err.message); setLoginSave("Log in") })
+
     }
     return (
         <Wrapper>
@@ -45,9 +49,9 @@ const Login = () => {
                 <div className="login-container__input">
                     <img src={Logo} alt="" />
                     <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
-                    <input type={"text"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
+                    <input type={"password"} placeholder="Password" onChange={({ target }) => setPassword(target.value)} />
                     <p className="forgotPassword">Forgot password?</p>
-                    <button onClick={LoginSubmit}>Log in</button>
+                    <button onClick={LoginSubmit}>{loginSave}</button>
                     <div className="login-Facebook">
                         <img src={faceBookIcon} alt="" />
                         <p>Log in with Facebook</p>
@@ -65,6 +69,7 @@ const Login = () => {
                     <p>Instagram от Facebook</p>
                 </div>
             </div>
+            {error.length > 0 ? <Error error={error} /> : ""}
         </Wrapper>
     );
 }

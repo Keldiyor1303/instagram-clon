@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 // import icon
 
@@ -22,6 +22,7 @@ import CloseFriends from "../assets/icons/closeFrindsIcon.svg"
 import DiscoverPeople from "../assets/icons/discoverPeopleIcon.svg"
 import OpenFacebook from "../assets/icons/openFacebookIcon.svg"
 import Setting from "../assets/icons/settingIcon.svg"
+import axios from 'axios';
 import API from '../utils/axios';
 import Error from '../components/error';
 
@@ -38,8 +39,7 @@ const profileSidebar = [
 
 const Profile = () => {
     const navigate = useNavigate();
-    const profileIdLocal = JSON.parse(localStorage.getItem("profileId"))
-
+    const { id, username } = useParams()
     const [postsLength, setPostsLength] = useState(0)
     const [postsGallary, setPostsGallary] = useState([])
     const [foollowers, setFollowers] = useState(0)
@@ -47,38 +47,44 @@ const Profile = () => {
 
     const [bio, setBio] = useState("")
     const [fullName, setfullName] = useState("")
-    const [username, setUsername] = useState("")
+    const [userName, setUsername] = useState("")
 
     const [error, setError] = useState("")
+
+    const [follow, setFollow] = useState("Follow");
 
     function SideBar() {
         const profileSidebar = document.querySelector('.profileSidebar')
         profileSidebar.classList.toggle('open')
     }
 
+    function AddFollow() {
+        API.post(`https://searching-server.herokuapp.com/following/follow/${id}`).then(res => setFollow('Unfollow'))
+    }
+
     useEffect(() => {
-        API.get(`/profile/${profileIdLocal}`).then(res => {
+        API.get(`/profile/${id}`).then(res => {
             setBio(res.data.bio);
             setUsername(res.data.username);
             setfullName(res.data.fullName);
         })
 
-        API.get(`/post/my`)
+        API.get(`/post/profile/${id}`)
             .then(res => { setPostsLength(res.data.length); setPostsGallary(res.data) })
             .catch(res => setError(res.message))
 
 
-        API.get(`/following/followers/count/${profileIdLocal}`)
+        API.get(`/following/followers/count/${id}`)
             .then(res => setFollowers(res.data))
             .catch(res => setError(res.message))
 
-        API.get(`/following/followings/count/${profileIdLocal}`)
+        axios.get(`https://searching-server.herokuapp.com/following/followings/count/${id}`)
             .then(res => setFollowing(res.data)).catch(err => console.log(err))
             .catch(res => setError(res.message))
 
+    }, [id]);
 
-
-    }, [profileIdLocal]);
+    console.log(postsGallary)
     return (
         <Wrapper>
             <div className='profile-container'>
@@ -86,7 +92,7 @@ const Profile = () => {
                     <div></div>
                     <div className='header__username'>
                         <img src={PrivateIcon} alt="privateIcon" />
-                        <p>{username}</p>
+                        <p>{userName}</p>
                         <img src={Down} alt="down" />
                     </div>
                     <div onClick={SideBar}>
@@ -100,15 +106,15 @@ const Profile = () => {
                             <img src={User} alt="user" />
                         </div>
                         <div className='info__statistics'>
-                            <div className='statistics__posts' onClick={() => navigate(`/myPosts`)}>
+                            <div className='statistics__posts' onClick={() => navigate(`/${username}/${id}/userPost`)}>
                                 <h4>{postsLength}</h4>
                                 <p>Posts</p>
                             </div>
-                            <div className='statistics__followers' onClick={() => navigate(`/followers`)}>
+                            <div className='statistics__followers'>
                                 <h4>{foollowers}</h4>
                                 <p>Followers</p>
                             </div>
-                            <div className='statistics__following' onClick={() => navigate(`/following`)}>
+                            <div className='statistics__following'>
                                 <h4>{foollowing}</h4>
                                 <p>Following</p>
                             </div>
@@ -121,7 +127,9 @@ const Profile = () => {
                 </div>
                 <div className='editProfile-and_storys'>
                     <div className='editProfile__btn'>
-                        <button onClick={() => navigate(`/profileEdit`)}>Edit Profile</button>
+                        {/* onClick={() => navigate(`/${userName}/${id}/ProfileEditUser`)} */}
+                        <button onClick={AddFollow}>{follow}</button>
+                        <button >Message</button>
                     </div>
                     <div className='storys__new'>
                         <div className='storys__new-add'>
@@ -203,7 +211,7 @@ const Wrapper = styled.div`
  
  .profile-container__header {
      padding: 11px 18px;
-     margin-top: 30px;
+     margin-top: 60px;
      display: flex;
      align-items: center;
      justify-content: space-between;
@@ -294,15 +302,17 @@ const Wrapper = styled.div`
  }
 
  .editProfile__btn {
+    display: flex;
+    gap: 20px;
     width: 100%;
     padding: 0 16px;
  }
 
  .editProfile__btn button {
     width: 100%;
-    height: 29px;
+    height: 35px;
     margin-bottom: 16px; 
-    background: #FFFFFF;
+    background: #fff;
     border: 1px solid rgba(60, 60, 67, 0.18);
     box-sizing: border-box;
     border-radius: 6px;
@@ -312,6 +322,11 @@ const Wrapper = styled.div`
     text-align: center;
     letter-spacing: -0.1px;
     color: #262626;
+ }
+
+ .editProfile__btn button:first-child {
+     background: #3797EF;
+     color: #fff;
  }
  
  .storys__new {

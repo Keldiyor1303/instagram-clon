@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 // import img 
@@ -7,9 +7,10 @@ import styled from 'styled-components';
 import User from "../assets/images/user1.png"
 import Error from '../components/error';
 import API from '../utils/axios';
-const ProfileEdit = () => {
+
+const ProfileEditUser = () => {
     const navigate = useNavigate();
-    const profileIdLocal = JSON.parse(localStorage.getItem("profileId"))
+    const { id } = useParams()
 
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ const ProfileEdit = () => {
 
     useEffect(() => {
         const inputs = document.querySelectorAll('input')
-        API.get(`/profile/${profileIdLocal}`)
+        API.get(`/profile/${id}`)
             .then(res => {
                 inputs[0].value = res.data.fullName; setName(res.data.fullName);
                 inputs[1].value = res.data.username; setUsername(res.data.username);
@@ -33,7 +34,7 @@ const ProfileEdit = () => {
                 inputs[6].value = res.data.gender; setGender(res.data.gender);
             })
             .catch(res => setError(res.message))
-    }, [profileIdLocal])
+    }, [id])
 
     function ProfileUpdate() {
         const reqBody = {
@@ -46,13 +47,13 @@ const ProfileEdit = () => {
             "gender": gender
         }
 
-        API.put(`https://searching-server.herokuapp.com/profile/update/${profileIdLocal}`, reqBody)
+        API.put(`https://searching-server.herokuapp.com/profile/update/${id}`, reqBody)
             .then(res => console.log("Succsecc"))
             .catch(res => setError(res.message))
     }
 
     // function LogOut() {
-    //     API.delete(`profile/delete/${profileIdLocal}`)
+    //     API.delete(`profile/delete/${id}`)
     //         .then(res => console.log(res))
     //         .catch(res => setError(res.message))
     // }
@@ -103,14 +104,13 @@ const ProfileEdit = () => {
 
                     </div>
                 </div>
-                {/* <button className='logout__btn' onClick={LogOut}>Log Out</button> */}
             </div>
             {error.length > 0 ? <Error error={error} /> : ""}
         </Wrapper >
     );
 }
 
-export default ProfileEdit;
+export default ProfileEditUser;
 
 const Wrapper = styled.div`
 

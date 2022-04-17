@@ -1,94 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import image from "../assets/images/nootbook.png"
 import Card from '../components/search/Card';
 import { Link } from 'react-router-dom';
 
 import searchimg from "../assets/images/search.svg"
-import doston from "../assets/images/doston.jpg"
-
-import Flip from "react-reveal/Flip";
+import API from '../utils/axios';
+import Error from '../components/error';
+import axios from 'axios';
 
 const Search = () => {
+    const [data, setData] = useState([]);
+    const [error, setError] = useState("");
+    const [img, setImg] = useState([]);
 
-    const imgData = [
-        { id: 1, image: image, },
-        { id: 2, image: image },
-        { id: 3, image: image },
-        { id: 4, image: image },
-        { id: 5, image: image },
-        { id: 6, image: image },
-        { id: 7, image: image },
-        { id: 8, image: image },
-        { id: 9, image: image },
-        { id: 10, image: image },
-        { id: 11, image: image },
-        { id: 12, image: image },
-        { id: 13, image: image },
-        { id: 14, image: image },
-        { id: 15, image: image },
-        { id: 16, image: image },
-        { id: 17, image: image },
-        { id: 18, image: image },
-        { id: 19, image: image },
-        { id: 20, image: image },
-        { id: 21, image: image },
-        { id: 22, image: image },
-        { id: 23, image: image },
-        { id: 24, image: image },
-        { id: 25, image: image },
-        { id: 26, image: image },
-        { id: 27, image: image },
-    ]
+    useEffect(() => {
+        axios.get(`https://searching-server.herokuapp.com/post`)
+            .then(res => setImg(res.data))
+            .catch(err => setError(err.message))
+    }, [])
+    const Search = (value) => {
 
-    const nameList = [
-        { name: "Keldiyor", image: doston },
-        { name: "Mirabzal", image: doston },
-        { name: "Hasanali", image: doston },
-        { name: "Javohir", image: doston },
-        { name: "Doniyor", image: doston },
-        { name: "Komil", image: doston },
-    ]
+        // if (!(value === "")) {
+        //     API.get(`/post/hashtag/${value}`).then(res => {
+        //         const usernameSaerch = res.data
 
-    const [data, setData] = useState([])
+        //         usernameSaerch.map(({ username }) => {
+        //             let faceData = []
+        //             let name = username.toUpperCase()
+        //             if ((name.search(value.toUpperCase()) >= 0) && (value.trim() !== ""))
+        //                 faceData.push(username)
+        //             setData(faceData)
+        //         })
+        //     })
+        // }
 
-    const search = (e) => {
-        let faceData = []
-        for (let i = 0; i < nameList.length; i++) {
-            let name = nameList[i].name.toUpperCase()
-            if ((name.search(e.target.value.toUpperCase()) >= 0) && (e.target.value !== "")) faceData.push(nameList[i])
+        if (!(value.trim() === "")) {
+
+            API.get(`/profile/username/${value}`)
+                .then(res => {
+                    let usernameSaerch = res.data
+                    usernameSaerch.map(({ username, id, password }) => {
+                        let faceData = []
+                        let name = username.toUpperCase()
+                        if ((name.search(value.toUpperCase()) >= 0) && (value.trim() !== ""))
+                            faceData.push(username, id, password)
+                        return (
+                            setData(faceData)
+                        )
+                    })
+                })
+                .catch(res => setError(res.message)
+                )
         }
 
-        setData(faceData)
     }
 
     return (
         <Wrapper>
-            <div className="search">
-                <input type="text" placeholder='Search' onChange={(e) => search(e)} />
-                <img src={searchimg} alt="" />
-            </div>
-
-            <Flip top cascade>
+            <div className='search-container'>
+                <div className="search">
+                    <input type="text" placeholder='Search' onChange={({ target }) => Search(target.value)} />
+                    <img src={searchimg} alt="" />
+                </div>
                 <ul className="users">
-                    {
-                        data.map(({ name, image }) => {
-                            return (
-                                <Link to="/">
-                                    <img src={image} alt="" />
-                                    <h2>{name}</h2>
-                                </Link>
-                            )
-                        })}
+                    <Link className='link' to={`/user/${data[0]}/${data[1]}`} key={Math.random()}>
+                        {/* <img src={`https://searching-server.herokuapp.com/attach/avatar/22`} alt='' /> */}
+                        <h2 className='item-username'>{data[0]}</h2>
+                    </Link>
                 </ul>
-            </Flip>
+                <div className="cards">
+                    {img.map(({ attachs, id }) => <Card key={id} attachs={attachs} id={id} />)}
+                </div>
 
-            <div className="cards">
-                {
-                    imgData.map(data => <Card key={data.id} data={data} />)
-                }
             </div>
-
+            {error.length > 0 ? <Error error={error} /> : ""}
         </Wrapper>
     );
 }
@@ -96,10 +81,13 @@ const Search = () => {
 export default Search;
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    position: relative;
 
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+        
     .search {
         position: relative;
         
@@ -152,7 +140,6 @@ const Wrapper = styled.div`
     .users {
         width: 100%;
         max-height: calc(812px - 164px);
-        background-color: white;
         overflow-y: auto;
         display: flex;
         flex-direction: column;

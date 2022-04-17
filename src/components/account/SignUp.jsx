@@ -10,33 +10,34 @@ import axios from 'axios';
 const SignUp = () => {
     const navigate = useNavigate();
 
-    const [fullname,  setFullname] =  useState("");
-    const [username,  setUsername] =  useState("");
-    const [password,  setPassword] =  useState("");
-    const [website,   setWebsite] =   useState("");
-    const [bio,       setBio] =       useState("");
-    const [email,     setEmail] =     useState("");
-    const [phone,     setPhone] =     useState("");
+    const [fullname, setFullname] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [website, setWebsite] = useState("");
+    const [bio, setBio] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("+998");
     const [birthDate, setBirthDate] = useState("");
-    const [gender,    setGender] =    useState("");
+    const [gender, setGender] = useState("");
 
     function SignUpSubmit() {
-       axios.post("https://searching-server.herokuapp.com/auth/registration", {
-            "fullName":  fullname, 
-            "username":  username, 
-            "password":  password, 
-            "website":   website, 
-            "bio":       bio, 
-            "email":     email, 
-            "phone":     phone, 
-            "birthDate": birthDate, 
-            "gender":    gender 
-    
-       }).then(res => {
-           localStorage.setItem("username", username);
-           localStorage.setItem("password", password);
-           navigate("/account/login")
-       }).catch(err => console.log(err))
+        axios.post("https://searching-server.herokuapp.com/auth/registration", {
+            "fullName": fullname,
+            "username": username,
+            "password": password,
+            "website": website,
+            "bio": bio,
+            "email": email,
+            "phone": phone,
+            "birthDate": birthDate,
+            "gender": gender
+
+        }).then(res => {
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+            localStorage.setItem("profileId", res.data.id);
+            navigate("/account/login")
+        }).catch(err => console.log(err))
     }
     return (
         <Wrapper>

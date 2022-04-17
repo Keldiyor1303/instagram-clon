@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import SearchHeader from './SearchHeader';
 import avatar from "../../assets/images/avatar.png"
 import followingImg from "../../assets/images/followImg.png"
+import API from '../../utils/axios';
+import Error from '../error';
+import { useState } from 'react';
 
 const YouLink = () => {
+
+    const [error, setError] = useState("")
     const data = [
         { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
         { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
@@ -12,21 +17,12 @@ const YouLink = () => {
         { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
         { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
         { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
-        { id: 1, avatar: avatar, name: "Keldiyor", image: followingImg },
     ]
+
+    API.post("https://searching-server.herokuapp.com/following/follow/6")
+        .then(res => console.log(res))
+        .catch(err => setError(err.message))
+
     return (
         <Wrapper>
             <SearchHeader />
@@ -42,12 +38,14 @@ const YouLink = () => {
                                     <p>{name}</p>
                                 </div>
 
-                                <img src={image} alt="" />
+                                <button className='youLike-btn'>Unfollow</button>
                             </li>
                         )
                     })
                 }
             </ul>
+
+            {error.length > 0 ? <Error error={error} /> : ""}
         </Wrapper>
     );
 }
@@ -75,9 +73,16 @@ const Wrapper = styled.div`
             justify-content: space-between;
             align-items: center;
 
-            & > img {
-                width: 46px;
-                height: 46px;
+            .youLike-btn {
+                padding: 6px 23px;
+                background: #3797EF;
+                border-radius: 4px;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: -0.2px;
+                color: #FFFFFF;
+                border: none;
             }
             
             .avatar-info {

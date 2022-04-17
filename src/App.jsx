@@ -1,6 +1,5 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "./components/Header";
 import Account from "./components/account/account";
 import Login from "./components/account/Login";
 import SignUp from "./components/account/SignUp";
@@ -14,43 +13,67 @@ import FollowingLink from "./components/likes/FollowingLink";
 import Main from "./containers/Main";
 import Footer from "./components/Footer";
 import ProfileEdit from "./containers/ProfileEdit";
+import Createstory from "./containers/Createstory";
+import MyPosts from "./containers/MyPosts";
+import PrivateRouter from "./utils/PrivateRouter";
+import UserProfile from "./User/Profile";
+import ProfileEditUser from "./User/ProfileEditUser";
+import UserPost from "./User/UserPost"
+import Following from "./components/Following";
+import Followers from "./components/Followers";
 
 function App() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  setTimeout(() => {
+    //const userToken = localStorage.getItem('user-token')
+    localStorage.removeItem("user-token");
+    navigate("/account")
+  }, 3600000);
+
   const pathLink = [
-    { path: "/", element: < Loading /> },
-    { path: "/home", element: < Home /> },
-    { path: "/search", element: < Search /> },
-    { path: "/likes", element: < Likes /> },
-    { path: "/likes/you", element: < YouLink /> },
-    { path: "/likes/following", element: < FollowingLink /> },
-    { path: "/profile", element: < Profile /> },
-    { path: "/profileEdit", element: < ProfileEdit /> },
+    { path: "/", element: <PrivateRouter >  < Loading />  </ PrivateRouter> },
+    { path: "/home", element: <PrivateRouter > < Home /> </ PrivateRouter> },
+    { path: "/search", element: <PrivateRouter > < Search /> </ PrivateRouter> },
+    { path: "/likes", element: <PrivateRouter > < Likes /> </ PrivateRouter> },
+    { path: "/likes/you", element: <PrivateRouter > < YouLink /> </ PrivateRouter> },
+    { path: "/likes/following", element: <PrivateRouter > < FollowingLink /> </ PrivateRouter> },
+    { path: "/profile", element: <PrivateRouter > < Profile /> </ PrivateRouter> },
+    { path: "/profileEdit", element: <PrivateRouter > < ProfileEdit /> </ PrivateRouter> },
     { path: "/account", element: < Account /> },
-    { path: "/main", element: < Main /> },
+    { path: "/main", element: <PrivateRouter > < Main /> </ PrivateRouter> },
     { path: "/account/login", element: < Login /> },
     { path: "/account/signup", element: < SignUp /> },
+    { path: "/createPost", element: <PrivateRouter > <Createstory /> </ PrivateRouter> },
+    { path: "/myPosts", element: <PrivateRouter > < MyPosts /> </ PrivateRouter> },
+    { path: "/user/:username/:id", element: <UserProfile /> },
+    { path: "/user/:username/:id/secretSection/ProfileEditUser", element: <PrivateRouter > < ProfileEditUser /> </ PrivateRouter> },
+    { path: "/:username/:id/userPost", element: <PrivateRouter > <UserPost /> </ PrivateRouter> },
+    { path: "/following", element: <PrivateRouter > <Following /> </ PrivateRouter> },
+    { path: "/followers", element: <PrivateRouter > <Followers /> </ PrivateRouter> },
+
   ]
 
-  const { pathname } = useLocation()
   return (
     <Wrapper>
-      {pathname !== "/" && <Header />}
-
       <Routes>
-        {
-          pathLink.map(({ path, element }) => {
-            return (
-              <Route key={Math.random()} path={path} element={element} />
-            )
-          })
-        }
+        {pathLink.map(({ path, element }) => {
+          return <Route
+            key={Math.random()}
+            path={path}
+            element={element} />
+        })}
       </Routes>
-      {!(pathname === "/"
-        || pathname === "/account"
-        || pathname === "/account/login"
-        || pathname === "/account/signup"
-        || pathname === "/profileEdit")
-        && <Footer />}
+      {
+        !(
+          pathname === "/"
+          || pathname === "/account"
+          || pathname === "/account/login"
+          || pathname === "/account/signup"
+          || pathname === "/profileEdit"
+        ) && <Footer />
+      }
     </Wrapper>
   );
 }
@@ -58,9 +81,9 @@ function App() {
 export default App;
 
 const Wrapper = styled.div`
-  height: 812px;
+  height: 100vh;
   width: 375px;
-  background-color: #FFFFFF;
+  background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
