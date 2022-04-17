@@ -17,18 +17,15 @@ import PostSideBar from "./PostSideBar";
 const PostPreview = ({ location, title, attachs, id, profileId }) => {
     localStorage.setItem("img", Heart)
     const [img, setImg] = useState(localStorage.getItem('img'))
-    const [postid, setPostid] = useState("");
     const [error, setError] = useState("")
     const [sidebar, setSideBar] = useState(false);
     const [postFullName, setPostFullName] = useState("");
-    setPostid(id)
-
     useEffect(() => {
         API.get(`/profile/${profileId}`).then(res => setPostFullName(res.data.fullName))
     }, [profileId])
 
     function LikeDelete() {
-        API.get(`/like/delete/${postid}`)
+        API.get(`/like/delete/${id}`)
             .then(res => setImg(Heart))
             .catch(err => setError(err.message))
     }
@@ -39,7 +36,7 @@ const PostPreview = ({ location, title, attachs, id, profileId }) => {
         for (let postMedia of postMedias) {
             postMedia.addEventListener('click', () => {
                 const reqBody = {
-                    "postId": postid,
+                    "postId": id,
                 }
                 API.post(`/like`, reqBody)
                     .then(res => setImg(btnLike))
