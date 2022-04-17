@@ -10,13 +10,21 @@ import axios from 'axios';
 const SignUp = () => {
     const navigate = useNavigate();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 77dc04208e63c8428f175199a351bc76f728cb78
     const [fullname, setFullname] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [website, setWebsite] = useState("");
     const [bio, setBio] = useState("");
     const [email, setEmail] = useState("");
+<<<<<<< HEAD
     const [phone, setPhone] = useState("+998");
+=======
+    const [phone, setPhone] = useState("");
+>>>>>>> 77dc04208e63c8428f175199a351bc76f728cb78
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
 
@@ -35,10 +43,14 @@ const SignUp = () => {
         }).then(res => {
             localStorage.setItem("username", username);
             localStorage.setItem("password", password);
+<<<<<<< HEAD
             localStorage.setItem("profileId", res.data.id);
+=======
+>>>>>>> 77dc04208e63c8428f175199a351bc76f728cb78
             navigate("/account/login")
         }).catch(err => console.log(err))
     }
+
     return (
         <Wrapper>
             <div className='signUp-container'>
@@ -49,6 +61,7 @@ const SignUp = () => {
                     <img src={Logo} alt="" />
                     <input type={"text"} placeholder="Fullname" onChange={({ target }) => setFullname(target.value)} />
                     <input type={"text"} placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
+
                     <input type={"password"} placeholder="password" onChange={({ target }) => setPassword(target.value)} />
                     <input type={"text"} placeholder="Website" onChange={({ target }) => setWebsite(target.value)} />
                     <input type={"text"} placeholder="bio" onChange={({ target }) => setBio(target.value)} />
@@ -59,12 +72,12 @@ const SignUp = () => {
                     <p className="forgotPassword">Forgot password?</p>
                     <button onClick={SignUpSubmit}>Sign Up</button>
                     <p className="accountSignup">Don’t have an account? <span onClick={() => navigate("/account/login")}>Login</span></p>
-                </div>
+                </div >
                 <div className="signUp-container-signUp__footer">
                     <p>Instagram от Facebook</p>
                 </div>
-            </div>
-        </Wrapper>
+            </div >
+        </Wrapper >
     );
 }
 

@@ -16,7 +16,7 @@ const defaultOptions = {
 let API = axios.create(defaultOptions);
 
 API.interceptors.request.use(function (config) {
-    let token=localStorage.getItem('user-token')
+    let token = localStorage.getItem('user-token')
 
     config.headers.Authorization = token ? `Bearer ${token}` : '';
     return config;
