@@ -10,21 +10,13 @@ import axios from 'axios';
 const SignUp = () => {
     const navigate = useNavigate();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 77dc04208e63c8428f175199a351bc76f728cb78
     const [fullname, setFullname] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [website, setWebsite] = useState("");
     const [bio, setBio] = useState("");
     const [email, setEmail] = useState("");
-<<<<<<< HEAD
-    const [phone, setPhone] = useState("+998");
-=======
     const [phone, setPhone] = useState("");
->>>>>>> 77dc04208e63c8428f175199a351bc76f728cb78
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
 
@@ -43,10 +35,8 @@ const SignUp = () => {
         }).then(res => {
             localStorage.setItem("username", username);
             localStorage.setItem("password", password);
-<<<<<<< HEAD
             localStorage.setItem("profileId", res.data.id);
-=======
->>>>>>> 77dc04208e63c8428f175199a351bc76f728cb78
+
             navigate("/account/login")
         }).catch(err => console.log(err))
     }
